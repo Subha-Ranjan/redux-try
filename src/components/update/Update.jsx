@@ -2,12 +2,14 @@ import React from "react";
 import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Update() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  console.log("name:",name," email:", email)
-
+  // const name = useSelector(state=>state.user.name); 
+  //but we need both info of the user---->
+  const user = useSelector(state=>state.user);
   return (
     <div className="update">
       <div className="updateWrapper">
@@ -32,7 +34,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder="John"
+                placeholder={user.name}
                 onChange={e=>setName(e.target.value)}
               />
             </div>
@@ -41,7 +43,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder="john@gmail.com"
+                placeholder={user.email}
                 onChange={e=>setEmail(e.target.value)}
 
               />
