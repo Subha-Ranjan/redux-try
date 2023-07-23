@@ -2,7 +2,8 @@ import React from "react";
 import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { update } from "../../redux/userSlice";
 
 export default function Update() {
   const [name, setName] = useState("");
@@ -10,6 +11,14 @@ export default function Update() {
   // const name = useSelector(state=>state.user.name); 
   //but we need both info of the user---->
   const user = useSelector(state=>state.user);
+  const dispatch = useDispatch();
+   //after declaring dispatchHandler, Now dispatch the actions
+  const handleUpdate = (e) => {
+    e.preventDefault(); //prevent refreshing of page upon clicking
+    dispatch(update({name,email})) // call the action=update, then payload=name&email
+  }
+
+ 
   return (
     <div className="update">
       <div className="updateWrapper">
@@ -54,6 +63,7 @@ export default function Update() {
             </div>
             <button
               className="updateButton"
+              onClick={handleUpdate}
             >
               Update
             </button>
