@@ -3,28 +3,25 @@ import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addMister, remove, update } from "../../redux/userSlice";
+import {  } from "../../redux/userSlice";
+import { updateUser } from "../../redux/apiCalls";
 
 export default function Update() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const name = useSelector(state=>state.user.name); 
-  //but we need both info of the user---->
-  const user = useSelector(state=>state.user);
+ 
+  const user = useSelector(state=>state.user.userInfo);
   const dispatch = useDispatch();
-   //after declaring dispatchHandler, Now dispatch the actions
+   
   const handleUpdate = (e) => {
-    e.preventDefault(); //prevent refreshing of page upon clicking
-    dispatch(update({name,email})) // call the action=update, then payload=name&email
+    e.preventDefault(); 
+    // dispatch(update({name,email})) 
+    updateUser({name,email}, dispatch);
   }
   const handleDelete = (e) =>{
     e.preventDefault(); 
-    dispatch(remove());
+    // dispatch(remove());
   } 
-  const checkFunctionality=(e)=>{
-    e.preventDefault();
-    dispatch(addMister({name}))
-  }
  
   return (
     <div className="update">
@@ -70,7 +67,7 @@ export default function Update() {
             </div>
             <button
               className="updateButton"
-              onClick={checkFunctionality}
+              onClick={handleUpdate}
             >
               Update
             </button>

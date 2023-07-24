@@ -3,26 +3,29 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    name: "SubhaRanjan",
-    email: "subha@gmail.com",
+    //name, email - put into obj USER
+    //another two fields added - pending, error
+    userInfo: { name: "SubhaRanjan", email: "subha@gmail.com" },
+    pending: false,
+    error: false,
   },
-  // action.payload ==> NEW 'username / email'
+
   reducers: {
-    update: (state, action) => {
-      state.name = action.payload.name;
-      state.email = action.payload.email;
+    // another set of reducer functions
+    updateStart: (state) => {
+      state.pending = true;
     },
-    //one more reducer - remove
-    remove: (state) => {
-      state = {};
+    updateSuccess: (state, action) => {
+      state.pending = false;
+      state.userInfo.name = action.payload.name;
+      state.userInfo.email = action.payload.email;
     },
-    //another custom reducer-function
-    addMister: (state, action) => {
-      state.name = "Mr. " + action.payload.name;
-      
+    updateError: (state) => {
+      state.pending = false;
+      state.error = true;
     },
   },
 });
 
-export const { update, remove, addMister } = userSlice.actions;
+export const { updateStart, updateSuccess, updateError } = userSlice.actions;
 export default userSlice.reducer;
