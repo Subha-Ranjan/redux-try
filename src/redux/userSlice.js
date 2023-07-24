@@ -16,8 +16,13 @@ export const userSlice = createSlice({
     remove: (state) => {
       state = {};
     },
+    //another custom reducer-function
+    addMister: (state, action) => {
+      state.name = "Mr. " + action.payload.name;
+      
+    },
   },
 });
 
-export const { update, remove } = userSlice.actions;
+export const { update, remove, addMister } = userSlice.actions;
 export default userSlice.reducer;

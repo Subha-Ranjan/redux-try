@@ -3,7 +3,7 @@ import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { remove, update } from "../../redux/userSlice";
+import { addMister, remove, update } from "../../redux/userSlice";
 
 export default function Update() {
   const [name, setName] = useState("");
@@ -21,6 +21,10 @@ export default function Update() {
     e.preventDefault(); 
     dispatch(remove());
   } 
+  const checkFunctionality=(e)=>{
+    e.preventDefault();
+    dispatch(addMister({name}))
+  }
  
   return (
     <div className="update">
@@ -66,7 +70,7 @@ export default function Update() {
             </div>
             <button
               className="updateButton"
-              onClick={handleUpdate}
+              onClick={checkFunctionality}
             >
               Update
             </button>
